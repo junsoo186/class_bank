@@ -16,8 +16,13 @@ import com.tenco.bank.repository.model.User;
 public class UserService {
 	
 	//DI - 의존 주입
-	@Autowired
+
 	private UserRepository userRepository;
+	
+	@Autowired // DI 처리
+	public UserService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 //	@Autowired 어노테이션으로 대체 가능 하다.
 // 생성자 의존 주입 - DI	
