@@ -3,6 +3,12 @@ package com.tenco.bank.repository.model;
 
 import java.sql.Timestamp;
 
+import org.springframework.http.HttpStatus;
+
+import com.tenco.bank.handler.exception.DataDeliveryException;
+import com.tenco.bank.utils.Define;
+import com.tenco.bank.utils.ValueFormatter;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +21,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class Account {
+public class Account  extends ValueFormatter{
 	private Integer id;
 	private String number;
 	private String password;
@@ -32,9 +38,32 @@ public class Account {
 		this.balance += amount;
 	}
 	// 패스워드 체크 
+	
+	
+	public void checkPassword(String password) {
+			// f      				==	f 일때 ---> true
+		if(this.password.equals(password) == false) {
+			throw new DataDeliveryException(Define.FAIL_ACCOUNT_PASSWROD, HttpStatus.BAD_REQUEST);
+		} 
+	}
+	
 	// 잔액 여부 확인 
+	
+	public void checkBalance(Long balance) {
+			
+	if(this.balance < balance) {
+		throw new DataDeliveryException(Define.LACK_Of_BALANCE, HttpStatus.BAD_REQUEST);
+	} 
+}
+	
 	// 계좌 소유자 확인 기능
 	
+	public void checkOwner(Integer userId) {
+	// f      				==	f 일때 ---> true
+if(this.userId != userId) {
+	throw new DataDeliveryException(Define.NOT_AN_AUTHENTICATED_USER, HttpStatus.BAD_REQUEST);
+		} 
+	}
 }
 
 

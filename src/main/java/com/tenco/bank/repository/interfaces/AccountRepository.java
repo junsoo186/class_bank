@@ -22,4 +22,7 @@ public interface AccountRepository {
 	public Account findByNumber(@Param("number") String id);
 	
 	// 코드 추가 예정
+	public Account findByAccountId(Integer accountId);
+	
+	
 }
