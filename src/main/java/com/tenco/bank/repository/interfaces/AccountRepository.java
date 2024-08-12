@@ -24,5 +24,6 @@ public interface AccountRepository {
 	// 코드 추가 예정
 	public Account findByAccountId(Integer accountId);
 	
-	
+	public int countByAccountIdAndType(@Param("type")String type, 
+			@Param("accountId")Integer accountId);
 }

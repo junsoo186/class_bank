@@ -24,5 +24,11 @@ public interface HistoryRepository {
 	// 조인 쿼리 , 서브쿼리, 동적 쿼리, type=all,de..., accountId
 	
 	public List<HistoryAccount> findByAccountIdAndTypeOfHistory(@Param("type") String type,
-			@Param("accountId") Integer accountId);
+			@Param("accountId") Integer accountId,
+			@Param("limit")int limit,
+			@Param("offset")int offset
+			);
+	
+	public int countByAccountIdAndType(@Param("type")String type, 
+			@Param("accountId")Integer accountId);
 }
